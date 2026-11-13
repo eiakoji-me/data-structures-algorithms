@@ -5,6 +5,7 @@ Data structures and algorithms in Java, one topic per folder.
 ## Topics
 
 <!-- Add a line per topic folder, e.g. - [Linked lists](linked-lists/) -->
+- [Tries](tries/)
 
 ## Layout
 
