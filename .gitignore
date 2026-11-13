@@ -1,2 +1,6 @@
-.vscode
-node_modules
+*.class
+out/
+.idea/
+*.iml
+.vscode/
+.DS_Store
