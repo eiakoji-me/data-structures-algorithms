@@ -1,38 +1,35 @@
 class Trie {
 
-  static class Node {
-    final Node[] children = new Node[26];
-    boolean isWord;
-  }
-
-  Node root;
+  TrieNode root;
   public Trie(){
-    root = new Node();
+    root = new TrieNode();
   }
 
   public void insert(String word){
-    Node node = root;
+    TrieNode node = root;
     for(char c : word.toCharArray()){
-      int i=c-'a';
-      if(node.children[i] == null) node.children[i] = new Node();
-      node = node.children[i];
+      int index=c-'a';
+      if(node.children[index] == null) node.children[index] = new TrieNode();
+      node = node.children[index];
     }
-    node.isWord = true;
+    node.isEnd = true;
   }
 
   public boolean search(String word) {
-    Node node = root;
+    TrieNode node = root;
     for(char c : word.toCharArray()){
-      node = node.children[c-'a'];
+      int index = c - 'a';
+      node = node.children[index];
       if(node == null) return false;
     }
-    return node.isWord;
+    return node.isEnd;
   }
 
   public boolean startsWith(String prefix) {
-    Node node = root;
+    TrieNode node = root;
     for(char c: prefix.toCharArray()){
-      node = node.children[c-'a'];
+      int index = c - 'a';
+      node = node.children[index];
       if(node == null) return false;
     }
     return true;
@@ -41,10 +38,20 @@ class Trie {
   public static void main(String[] args){
     Trie obj = new Trie();
     obj.insert("apple");
-    System.out.println(obj.search("apple")); //true
-    System.out.println(obj.search("app")); //false
-    System.out.println(obj.startsWith("app")); //true
     obj.insert("app");
-    System.out.println(obj.search("app")); //true
+    obj.insert("appricot");
+    System.out.println(obj.search("apple"));   //true
+    System.out.println(obj.search("app"));     //true
+    System.out.println(obj.search("appl"));    //false
+    System.out.println(obj.startsWith("app")); //true
+  }
+}
+
+class TrieNode {
+  TrieNode[] children;
+  boolean isEnd;
+  TrieNode(){
+    children = new TrieNode[26];
+    isEnd = false;
   }
 }
